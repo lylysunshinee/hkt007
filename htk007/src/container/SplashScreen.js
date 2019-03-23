@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
+import { AccessTokenManager } from '@data';
 
-import { Actions } from 'react-native-router-flux'
 
 class SplashScreen extends Component {
     constructor(props) {
@@ -10,20 +12,24 @@ class SplashScreen extends Component {
 
         };
     }
-
-    componentDidMount() {
-        this.timeOut = setTimeout(this.changeScreen, 3000)
+    async componentWillMount() {
+        AccessTokenManager.initialize().then(
+            res => {
+                if (AccessTokenManager.getAccessToken()) {
+                    Actions.login()
+                } else {
+                    setTimeout(() => {
+                        Actions.main({ type: ActionConst.RESET })
+                    }, 1000);
+                }
+            },
+            err => {
+                setTimeout(() => {
+                    Actions.selectProductPortal({ type: ActionConst.RESET })
+                }, 1000);
+            }
+        )
     }
-
-    changeScreen = () => {
-        return Actions.login()
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.timeOut)
-    }
-
-
     render() {
         return (
             <ImageBackground source={require("../../assets/images/splash.png")}

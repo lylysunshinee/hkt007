@@ -25,7 +25,7 @@ export function loginAction(params) {
         API.login(params).then(
             (res) => {
                 if (res.data.code == 200) {
-                    AccessTokenManager.saveAccessToken(res.data.data.token)
+                    AccessTokenManager.saveAccessToken(res.data.token)
                     dispatch(loginAcitonSuccess(res.data));
                     return;
                 } else {

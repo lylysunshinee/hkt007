@@ -11,6 +11,9 @@ const getInstance = () => {
     const instance = axios.create({
         baseURL: AppConfig.API_BASE_URL,
         timeout: 30000,
+        headers: {
+            'Content-Type': 'application/json'
+        }
     });
 
     instance.interceptors.response.use(
@@ -42,7 +45,11 @@ API.xample = () => {
 }
 
 API.login = (params) => {
-    return API.instance.post('portal/login', params)
+    return API.instance.post('/v1/user/authenticate', params)
+}
+
+API.checking=(params)=>{
+    return API.instance.post('/v1/checking/create',params)
 }
 
 API.logout = () => {

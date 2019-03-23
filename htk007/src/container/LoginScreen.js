@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ImageBackground, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from "react-native-linear-gradient";
 import _ from 'lodash';
 import { API } from '@network';
-
+import { loginAction } from "@redux";
+// import firebase from 'firebase';
+import { connect } from "react-redux";
+import { AccessTokenManager } from '@data';
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+GoogleSignin.configure();
 
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: 'dongnh@topica.edu.vn',
+            password: 'topica123',
             checked: false,
+            userInfo: {}
         };
     }
 
     onClickLogin = () => {
-        Actions.main()
-    }
-
-    loginGoole = () => {
-        return API.xample().then(
+        let params = {
+            email: this.state.username,
+            password: this.state.password
+        }
+        return API.login(params).then(
             res => {
-                console.log('res -->',res)
+                console.log('login succress', res)
+                if (res.data.token) {
+                    AccessTokenManager.saveAccessToken(res.data.token)
+                    Actions.main()
+                }
             },
             err => {
-                console.log('err -->',err)
+                console.log('login fail', err)
             }
         )
+
     }
 
     render() {
@@ -40,14 +51,41 @@ class LoginScreen extends Component {
         );
     }
 
+    // Somewhere in your code
+    _signIn = async () => {
+        try {
+            let params = {}
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            console.log('userInfo', userInfo)
+            this.setState({ userInfo }, () => {
+                params.token_google = userInfo.accessToken
+                this.props.login(params)
+            });
+
+        } catch (error) {
+            console.log('error', error)
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // play services not available or outdated
+            } else {
+                // some other error happened
+            }
+        }
+    };
+
     renderMainContent = () => {
         return (
             <View style={{ alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Image source={require('../../assets/images/logo.png')} style={{ marginVertical: 15 }} />
                 <TextInput
                     style={{ height: 40, borderRadius: 5, width: '100%', marginVertical: 15, backgroundColor: 'white', }}
-                    onChangeText={(text) => this.setState({ userame: text })}
-                    value={this.state.text}
+                    onChangeText={(text) => this.setState({ username: text })}
+                    value={this.state.username}
                     placeholder={'  Tên đăng nhập'}
                     placeholderTextColor={'#c6c6c6'}
 
@@ -56,7 +94,7 @@ class LoginScreen extends Component {
                 <TextInput
                     style={{ height: 40, borderRadius: 5, width: '100%', backgroundColor: 'white', }}
                     onChangeText={(text) => this.setState({ password: text })}
-                    value={this.state.text}
+                    value={this.state.password}
                     placeholder={'  Mật khẩu'}
                     placeholderTextColor={'#c6c6c6'}
                 />
@@ -86,10 +124,16 @@ class LoginScreen extends Component {
                 <View style={[styles.loginbutton, { backgroundColor: 'transparent' }]}>
                     <Text style={{ fontSize: 16, color: '#707070' }}>{'Hoặc'} </Text>
                 </View>
-                <TouchableOpacity onPress={() => { this.loginGoole() }} style={[styles.loginbutton, { flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }]} >
+                <TouchableOpacity onPress={() => { this._signIn() }} style={[styles.loginbutton, { flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }]} >
                     <Image source={require('../../assets/images/google_icon.png')} style={{ width: 25, height: 25, marginRight: 10 }}  ></Image>
                     <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#383838' }}> {'Đăng nhập với Google'}</Text>
                 </TouchableOpacity>
+                {/* <GoogleSigninButton
+                    style={{width: '100%',height:55,borderRadius:5}}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={this._signIn}
+                    disabled={false} /> */}
 
             </View>
         )
@@ -112,5 +156,17 @@ const styles = StyleSheet.create({
         borderRadius: 5
     }
 });
+const mapStateToProps = state => ({
+    loginData: state.loginReducer.login
+});
 
-export default LoginScreen;
+const mapDispatchToProps = {
+    login: loginAction
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginScreen);
+

@@ -14,6 +14,8 @@ export default {
     platformVersion: '1.0',
 
     // URLs
-    API_BASE_URL: 'http://192.168.137.1:8082/api'
+    API_BASE_URL: 'http://42.113.206.226:9999/api'
 
 }
+
+

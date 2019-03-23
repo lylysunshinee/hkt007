@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "526962336706",
+    "firebase_url": "https://hogwarts-map.firebaseio.com",
+    "project_id": "hogwarts-map",
+    "storage_bucket": "hogwarts-map.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526962336706:android:cd87cc942823a230",
+        "android_client_info": {
+          "package_name": "com.htk007"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526962336706-3rv4m074l8rcnq9cdvuaj4b7eqcdt6ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.htk007",
+            "certificate_hash": "806f4b3924e9b93c689dd3652b8ee3e2cbf7f783"
+          }
+        },
+        {
+          "client_id": "526962336706-jfb6bm7rk95v6n99bdbh4s1jobc8gjuk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtb7FLiROEYfp68PuK6-_Mc_s-hNp41X8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526962336706-jfb6bm7rk95v6n99bdbh4s1jobc8gjuk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

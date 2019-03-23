@@ -13,11 +13,13 @@ import TrackingUserScreen from '../container/TrackingUserScreen';
 const AppRouter = () => <Router>
     <Stack key='root'>
         <Scene key='splash' component={SplachScreen} title='splash' hideNavBar={true} initial />
-        <Scene key='login' component={LoginScreen} title='login' hideNavBar={true} />
+        <Scene key='login' component={LoginScreen} title='login' hideNavBar={true}  />
+        {/* <Scene key="drawer" drawer contentComponent={NavigationDrawer} drawerPosition="left" hideNavBar > */}
         <Scene key='main' component={MainContainerScreen} title='main' hideNavBar={true} />
         <Scene key='calendarContainer' component={CalendarContainerScreen} title='calendarContainer' hideNavBar={true} />
         <Scene key='autocheckin' component={AutoCheckInScreen} title='autocheckin' hideNavBar={true} />
         <Scene key='trackingUser' component={TrackingUserScreen} title='trackingUser' hideNavBar={true} />
+        {/* </Scene> */}
     </Stack>
 </Router>
 
