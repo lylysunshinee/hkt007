@@ -7,6 +7,8 @@ import { API } from '@network';
 const BG_CHECK_OUT = require('../../assets/images/bg_out_checkin.png');
 const BG_CHECK_IN = require('../../assets/images/checkin_bg.png');
 import moment from 'moment';
+import { Actions,ActionConst } from 'react-native-router-flux';
+
 
 
 

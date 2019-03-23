@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ImageBackground, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements'
-import { Actions } from 'react-native-router-flux';
+import { Actions ,ActionConst} from 'react-native-router-flux';
 import LinearGradient from "react-native-linear-gradient";
 import _ from 'lodash';
 import { LocalStorage } from "@data";
@@ -42,7 +42,7 @@ class LoginScreen extends Component {
                 console.log('login succress', res)
                 if (res.data.token) {
                     AccessTokenManager.saveAccessToken(res.data.token)
-                    Actions.main()
+                    Actions.drawer({ type: ActionConst.RESET });
                 }
             },
             err => {
@@ -105,6 +105,7 @@ class LoginScreen extends Component {
                     onChangeText={(text) => this.setState({ password: text })}
                     value={this.state.password}
                     placeholder={'  Mật khẩu'}
+                    secureTextEntry={true}
                     placeholderTextColor={'#c6c6c6'}
                 />
                 <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', }}>

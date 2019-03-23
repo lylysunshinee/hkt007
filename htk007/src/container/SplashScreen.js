@@ -16,7 +16,7 @@ class SplashScreen extends Component {
         AccessTokenManager.initialize().then(
             res => {
                 if (AccessTokenManager.getAccessToken()) {
-                    Actions.main({ type: ActionConst.RESET })
+                    Actions.drawer({ type: ActionConst.RESET });
                 } else {
                     setTimeout(() => {
                         Actions.login({ type: ActionConst.RESET })
