@@ -4,7 +4,6 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import AutoCheckInScreen from '../container/AutoCheckInScreen';
 import CalendarContainerScreen from '../container/CalendarContainerScreen';
 import TrackingUserScreen from '../container/TrackingUserScreen';
-import CheckingComonent from '../container/CheckingComponent'
 
 const tabScreen = {
   AutoCheckingScreen: 0,
@@ -25,12 +24,6 @@ class MainContainerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* coconuc */}
-        <CheckingComonent identifier={'REGION1'} uuid={'97d36255-97f8-6254-d3fc-c251fee8e83b'} />
-        {/* blueberry */}
-        <CheckingComonent identifier={'REGION2'} uuid={'84CA4869-3F9A-6517-25EA-B42804DF18FB'} />
-        {/* xanh ngoc */}
-        <CheckingComonent identifier={'REGION3'} uuid={'BC4DCF53-53DC-2D5F-2F72-0274E20107B8'} />
         <ScrollableTabView
           onChangeTab={this.changeTab}
           initialPage={0}
@@ -45,7 +38,6 @@ class MainContainerScreen extends Component {
           <CalendarContainerScreen tabLabel={'calendar'} />
           <TrackingUserScreen tabLabel={'tracking'} />
         </ScrollableTabView>
-
       </View>
     );
   }

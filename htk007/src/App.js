@@ -12,7 +12,8 @@ import AppRoutes from '@navigation';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import OneSignal from 'react-native-onesignal';
-
+import { LocalStorage } from '@data';
+import { KeyStorerage } from '@constant';
 import firebase from 'firebase';
 import { firebaseConfig } from './constans/FiresbaseConfig';
 
@@ -49,6 +50,7 @@ export default class App extends Component {
 
   onIds(device) {
     console.log('Device info: ', device);
+    LocalStorage.set(KeyStorerage.DEVICE_ID, device.userId)
   }
 
 

@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from
 import MainHeader from '../container/MainHeader';
 import NotificationComponent from '../container/NotificationComponent';
 import { Icon, Avatar } from "react-native-elements";
-
+import { API } from '@network';
 const BG_CHECK_OUT = require('../../assets/images/bg_out_checkin.png');
-const BG_CHECK_IN = require('../../assets/images/checkin_bg.png')
+const BG_CHECK_IN = require('../../assets/images/checkin_bg.png');
+import moment from 'moment';
+
 
 
 const leftHeader =
@@ -15,7 +17,6 @@ const leftHeader =
 
 const centerHeader =
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        {/* <Text style={[AppStyles.boldText, { color: '#FFFFFF', fontSize: 19, textAlign: 'center', }]}> TOPICA NATIVE </Text> */}
     </View>
 
 
@@ -25,8 +26,32 @@ class AutoCheckInScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isCheckedIn: true
+            isCheckedIn: false,
+            dataCheckin: {}
         };
+    }
+
+    componentWillMount() {
+        this.requestDatafromServer()
+    }
+
+    requestDatafromServer = () => {
+        return API.getcheckin().then(
+            res => {
+                if (res.data[0]) {
+                    if (__DEV__) {
+                        console.log('data check in', res.data[0])
+                    }
+                    this.setState({
+                        dataCheckin: res.data[0],
+                        isCheckedIn: true
+                    })
+                }
+            },
+            err => {
+                this.setState({ isCheckedIn: true, dataCheckin: {} })
+            }
+        )
     }
 
     renderOutMainConnent = () => {
@@ -39,6 +64,7 @@ class AutoCheckInScreen extends Component {
     }
 
     renderInMainConnent = () => {
+        let date_time = moment.unix().format("YYYY-MM-DD-HH:MM")
         return (
             <View style={{ width: '100%', height: 150, justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
@@ -46,7 +72,7 @@ class AutoCheckInScreen extends Component {
                     <Text style={{ color: '#009e15', fontSize: 14 }}>{'Bạn đang ở trong khu vực làm việc'}</Text>
                 </View>
                 <Text style={{ color: '#009e15', fontSize: 14 }}>{'Thời gian ghi nhận lúc'}</Text>
-                <Text style={{ fontSize: 48, color: '#243b55' }}>{'08:30:25'}</Text>
+                <Text style={{ fontSize: 48, color: '#243b55' }}>{'08:26:15'}</Text>
             </View>
         )
     }

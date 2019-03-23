@@ -1,4 +1,6 @@
 rootProject.name = 'htk007'
+include ':@estimote_react-native-proximity'
+project(':@estimote_react-native-proximity').projectDir = new File(rootProject.projectDir, '../node_modules/@estimote/react-native-proximity/android')
 include ':react-native-google-signin'
 project(':react-native-google-signin').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-signin/android')
 include ':react-native-google-signin'

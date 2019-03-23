@@ -663,6 +663,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@estimote/react-native-proximity@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@estimote/react-native-proximity/-/react-native-proximity-0.4.1.tgz#462cbeec4b7d4dbe625555fa6e8f8bb008559e1e"
+  integrity sha512-Ybc7dqZgcw0gPQvAuwZ4FRMujY3elbeOfYO5Jmr/l/JUvxKBU338Vs+4j3IP/fLjrF5bUTucSJmbyUTCO8vpUw==
+
 "@firebase/app-types@0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.3.7.tgz#9b00609ca7a992de77a62254296111ae05ee0128"

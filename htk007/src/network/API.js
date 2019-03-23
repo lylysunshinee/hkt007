@@ -56,9 +56,11 @@ API.logout = () => {
     return API.instance.get('portal/logout')
 }
 
-API.getPublicToken = () => {
-    return API.instance.get('portal/stream/getPublicToken')
+API.getcheckin = () => {
+    return API.instance.get('/v1/checking/get-check-in')
 }
+
+
 
 /* Export Component ==================================================================== */
 export default API;

@@ -4,6 +4,8 @@ import { CheckBox } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from "react-native-linear-gradient";
 import _ from 'lodash';
+import { LocalStorage } from "@data";
+import { KeyStorerage} from "@constant";
 import { API } from '@network';
 import { loginAction } from "@redux";
 // import firebase from 'firebase';
@@ -19,14 +21,21 @@ class LoginScreen extends Component {
             username: 'dongnh@topica.edu.vn',
             password: 'topica123',
             checked: false,
-            userInfo: {}
+            userInfo: {},
+            onesignal_id: ''
         };
+    }
+
+    async componentDidMount() {
+        let onesignal_id = await LocalStorage.get(KeyStorerage.DEVICE_ID);
+        this.setState({ onesignal_id })
     }
 
     onClickLogin = () => {
         let params = {
             email: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            onesignal_id: this.state.onesignal_id
         }
         return API.login(params).then(
             res => {

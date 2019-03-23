@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Actions,ActionConst } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { AccessTokenManager } from '@data';
 
@@ -16,17 +16,15 @@ class SplashScreen extends Component {
         AccessTokenManager.initialize().then(
             res => {
                 if (AccessTokenManager.getAccessToken()) {
-                    Actions.login()
+                    Actions.main({ type: ActionConst.RESET })
                 } else {
                     setTimeout(() => {
-                        Actions.main({ type: ActionConst.RESET })
+                        Actions.login({ type: ActionConst.RESET })
                     }, 1000);
                 }
             },
             err => {
-                setTimeout(() => {
-                    Actions.selectProductPortal({ type: ActionConst.RESET })
-                }, 1000);
+                Actions.login()
             }
         )
     }

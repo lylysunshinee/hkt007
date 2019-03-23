@@ -3,7 +3,7 @@ import { AccessTokenManager } from '@data';
 import { Alert } from 'react-native';
 
 const UnauthorizeStatusCode = 401;
-  const LoginScene = 'selectProductPortal';
+  const LoginScene = 'login';
   const MaintainStautusCode = 500;
   const  Off_Server = 503;
 const MaintenanceScene = 'maintenance';
