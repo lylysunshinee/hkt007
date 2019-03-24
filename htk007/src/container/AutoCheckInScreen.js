@@ -82,7 +82,7 @@ class AutoCheckInScreen extends Component {
         let { dataCheckin } = this.state;
         let date_time = moment(dataCheckin.date_created).format("hh:mm:ss")
         return (
-            <View style={{ width: '100%', height: 150, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ width: '100%', height: 200, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
                     <Image style={{ width: 14, height: 14, marginRight: 10 }} source={require('../../assets/images/pin_green.png')} />
                     <Text style={{ color: '#009e15', fontSize: 14 }}>{'Bạn đang ở trong khu vực làm việc'}</Text>

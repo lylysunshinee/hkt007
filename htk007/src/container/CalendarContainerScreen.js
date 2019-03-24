@@ -45,9 +45,9 @@ class CalendarContainerScreen extends Component {
                     }}
                 />
 
-                {this.renderJobs('Làm báo cáo')}
-                {this.renderJobs('trà đá')}
-                {this.renderJobs('trả bải Linhtt17')}
+                {this.renderJobs('Hứa thưởng 500k cho LinhTT17 ')}
+                {this.renderJobs('Họp phòng TOX')}
+                {this.renderJobs('Thưởng ThuỷVV đi cưới')}
             </View>
         );
     }

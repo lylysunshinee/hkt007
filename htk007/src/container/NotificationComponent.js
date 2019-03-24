@@ -33,7 +33,7 @@ class NotificationComponent extends Component {
     }
     render() {
         return (
-            <TouchableOpacity activeOpacity={0.9} onPress={() => Actions.notification()} style={{ margin: 5, alignItems: 'center', justifyContent: 'center',marginRight:15 }}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => { }} style={{ margin: 5, alignItems: 'center', justifyContent: 'center', marginRight: 15 }}>
 
                 <Image resizeMode='contain' source={require('../../assets/images/bell.png')} style={{ width: 30 }} />
                 {

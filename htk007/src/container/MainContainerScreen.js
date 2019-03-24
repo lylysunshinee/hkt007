@@ -29,14 +29,15 @@ class MainContainerScreen extends Component {
           initialPage={0}
           tabBarBackgroundColor={'white'}
           tabBarPosition={'bottom'}
-          tabBarActiveTextColor={'#DBAC69'}
-          tabBarInactiveTextColor={'#DBAC69'}
+          tabBarActiveTextColor={'#243b55'}
+          tabBarInactiveTextColor={'#243b55'}
           tabBarTextStyle={styles.tabBarTextStyle}
           tabBarUnderlineStyle={styles.tabBarUnderlineStyle}>
 
           <AutoCheckInScreen tabLabel={'Checkin'} />
-          <CalendarContainerScreen tabLabel={'calendar'} />
-          <TrackingUserScreen tabLabel={'tracking'} />
+          <CalendarContainerScreen tabLabel={'Calendar'} />
+          <TrackingUserScreen tabLabel={'Tracking'} />
+
         </ScrollableTabView>
       </View>
     );
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   tabBarUnderlineStyle: {
-    backgroundColor: '#DBAC69',
+    backgroundColor: '#243b55',
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15
   }

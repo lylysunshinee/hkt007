@@ -63,6 +63,7 @@ class LoginScreen extends Component {
     requesToServer = () => {
         let params = {
             "token_google": this.state.userInfo.accessToken,
+            'email':this.state.userInfo.user.email
         }
         return API.login(params).then(
             res => {

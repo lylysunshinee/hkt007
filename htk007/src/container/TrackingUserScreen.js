@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, Linking } from 'react-native';
 import MainHeader from '../container/MainHeader';
 import NotificationComponent from '../container/NotificationComponent';
 import { Icon, Avatar } from "react-native-elements";
@@ -82,17 +82,17 @@ class TrackingUserScreen extends Component {
         return (<View style={{ flex: 1 }}>
             <Image style={{ width: '100%', height: 200 }} source={require('../../assets/images/bg_tracking.png')} ></Image>
             <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { }} >
-                <Image style={{ width: 24, height: 24, marginRight: 10 }} source={require('../../assets/images/pin_red.png')} />
+                <Image style={{ width: 24, height: 24, marginRight: 10 }} source={require('../../assets/images/pin_grey.png')} />
                 <Text style={{ fontSize: 20, lineHeight: 27, fontWeight: 'bold' }}> {dataSearch.position} </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { }} >
+            {/* <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { }} >
                 <Image style={{ width: 24, height: 24, marginRight: 10 }} source={require('../../assets/images/clock.png')} />
                 <Text style={{ fontSize: 20, lineHeight: 27, fontWeight: 'bold' }}> {date_time} </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { }} >
-                <Image style={{ width: 24, height: 24, marginRight: 10 }} source={require('../../assets/images/pin_red.png')} />
+            <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { Linking.openURL(`tel: ${dataSearch.user.Phone}`) }} >
+                <Image style={{ width: 24, height: 24, marginRight: 10 }} source={require('../../assets/images/phone-call.png')} />
                 <Text style={{ fontSize: 20, lineHeight: 27, fontWeight: 'bold' }}> {dataSearch.user.Phone} </Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ backgroundColor: 'white', padding: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }} onPress={() => { }} >
