@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View,DeviceEventEmitter } from 'react-native';
+import { Platform, StyleSheet, Text, View, DeviceEventEmitter } from 'react-native';
 import AppRoutes from '@navigation';
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -28,7 +28,7 @@ export default class App extends Component {
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds.bind(this));
-    OneSignal.inFocusDisplaying(2);
+    OneSignal.inFocusDisplaying(1);
   }
 
   componentWillUnmount() {

@@ -7,7 +7,7 @@ import { API } from '@network';
 const BG_CHECK_OUT = require('../../assets/images/bg_out_checkin.png');
 const BG_CHECK_IN = require('../../assets/images/checkin_bg.png');
 import moment from 'moment';
-import { Actions,ActionConst } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 
 
@@ -33,9 +33,19 @@ class AutoCheckInScreen extends Component {
         };
     }
 
-    componentWillMount() {
-        this.requestDatafromServer()
+
+
+    componentDidMount() {
+        this.intervalId = setInterval(this.requestDatafromServer.bind(this), 5000);
     }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+    clearInter = () => {
+        return clearInterval(this.interval)
+    }
+
 
     requestDatafromServer = () => {
         return API.getcheckin().then(
@@ -47,7 +57,10 @@ class AutoCheckInScreen extends Component {
                     this.setState({
                         dataCheckin: res.data[0],
                         isCheckedIn: true
+                    }, () => {
+                        this.clearInter()
                     })
+
                 }
             },
             err => {
@@ -66,7 +79,8 @@ class AutoCheckInScreen extends Component {
     }
 
     renderInMainConnent = () => {
-        let date_time = moment.unix().format("YYYY-MM-DD-HH:MM")
+        let { dataCheckin } = this.state;
+        let date_time = moment(dataCheckin.date_created).format("hh:mm:ss")
         return (
             <View style={{ width: '100%', height: 150, justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
@@ -74,7 +88,7 @@ class AutoCheckInScreen extends Component {
                     <Text style={{ color: '#009e15', fontSize: 14 }}>{'Bạn đang ở trong khu vực làm việc'}</Text>
                 </View>
                 <Text style={{ color: '#009e15', fontSize: 14 }}>{'Thời gian ghi nhận lúc'}</Text>
-                <Text style={{ fontSize: 48, color: '#243b55' }}>{'08:26:15'}</Text>
+                <Text style={{ fontSize: 48, color: '#243b55' }}>{date_time}</Text>
             </View>
         )
     }

@@ -37,7 +37,7 @@ const getInstance = () => {
     );
     return instance;
 }
-const API = {  instance: getInstance() };
+const API = { instance: getInstance() };
 
 
 API.xample = () => {
@@ -48,8 +48,8 @@ API.login = (params) => {
     return API.instance.post('/v1/user/authenticate', params)
 }
 
-API.checking=(params)=>{
-    return API.instance.post('/v1/checking/create',params)
+API.checking = (params) => {
+    return API.instance.post('/v1/checking/create', params)
 }
 
 API.logout = () => {
@@ -60,7 +60,9 @@ API.getcheckin = () => {
     return API.instance.get('/v1/checking/get-check-in')
 }
 
-
+API.findEmploy = (params) => {
+    return API.instance.post('/v1/checking/find-employee/', params)
+}
 
 /* Export Component ==================================================================== */
 export default API;

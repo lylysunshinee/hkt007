@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ImageBackground, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements'
-import { Actions ,ActionConst} from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import LinearGradient from "react-native-linear-gradient";
 import _ from 'lodash';
 import { LocalStorage } from "@data";
-import { KeyStorerage} from "@constant";
+import { KeyStorerage } from "@constant";
 import { API } from '@network';
 import { loginAction } from "@redux";
 // import firebase from 'firebase';
@@ -18,8 +18,8 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'dongnh@topica.edu.vn',
-            password: 'topica123',
+            username: '',
+            password: '',
             checked: false,
             userInfo: {},
             onesignal_id: ''
@@ -60,17 +60,31 @@ class LoginScreen extends Component {
         );
     }
 
+    requesToServer = () => {
+        let params = {
+            "token_google": this.state.userInfo.accessToken,
+        }
+        return API.login(params).then(
+            res => {
+                console.log('login succress', res)
+                if (res.data.token) {
+                    AccessTokenManager.saveAccessToken(res.data.token)
+                    Actions.drawer({ type: ActionConst.RESET });
+                }
+            },
+            err => {
+                console.log('login fail', err)
+            }
+        )
+    }
+
     // Somewhere in your code
     _signIn = async () => {
         try {
-            let params = {}
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             console.log('userInfo', userInfo)
-            this.setState({ userInfo }, () => {
-                params.token_google = userInfo.accessToken
-                this.props.login(params)
-            });
+            this.setState({ userInfo }, () => { this.requesToServer() })
 
         } catch (error) {
             console.log('error', error)
